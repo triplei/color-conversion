@@ -1,0 +1,22 @@
+{
+  "name": "triplei/color-conversion",
+  "license": "MIT",
+  "description": "PHP Library for converting colours from hex to rgb",
+  "keywords" :["color", "conversion", "utility"],
+  "authors" : [
+    {
+      "name": "Dan Klassen",
+      "email": "dan@triplei.ca",
+      "homepage": "http://www.triplei.ca",
+      "role": "developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload" : {
+    "psr-0" : {
+      "TripleI\\ColorConversion": "src"
+    }
+  }
+}
