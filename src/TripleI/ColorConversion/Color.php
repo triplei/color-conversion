@@ -20,6 +20,15 @@ class Color {
     }
 
     /**
+     * output a hex representation of the color
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getHex();
+    }
+
+    /**
      * @param string $color hex representation of the colour
      */
     public function setHex($color)
@@ -30,6 +39,14 @@ class Color {
         }
 
         $this->color = $color;
+    }
+
+    /**
+     * @return string six character hex representation of the color
+     */
+    public function getHex()
+    {
+        return '#' . $this->color;
     }
 
     /**
@@ -46,6 +63,43 @@ class Color {
             'g' => $g,
             'b' => $b
         ];
+    }
+
+    /**
+     * @param int $amount (0 - 255)
+     *
+     * @return string the adjusted color
+     */
+    public function darken($amount)
+    {
+        return $this->adjustBrighness($amount * -1);
+    }
+
+    /**
+     * @param int $amount (0 - 255)
+     *
+     * @return string the adjusted color
+     */
+    public function lighten($amount)
+    {
+        return $this->adjustBrighness($amount);
+    }
+
+    /**
+     * @param int $amount (0 - 255)
+     *
+     * @return string
+     */
+    protected function adjustBrighness($amount)
+    {
+        $colors = $this->getRGB();
+        $hex = '';
+        foreach ($colors as $color => $value) {
+            $colors[$color] = max(0, min(255, $value + $amount));
+            $hex .= str_pad(dechex($colors[$color]), 2, '0', STR_PAD_LEFT);
+        }
+        $this->setHex($hex);
+        return $this->getHex();
     }
 
     /**
